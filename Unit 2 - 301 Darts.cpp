@@ -5,7 +5,6 @@
 #include "Player.h"
 using namespace std;
 
-
 //TEST COMMIT
 int main()
 {
@@ -57,9 +56,6 @@ int main()
 
 			//joe.throws++;//add one to the number of darts thrown by the player
 
-			//?
-			
-
 			if (joe.tempScore == 50 || joe.score > 70)
 			{
 				if (joe.score > 70)
@@ -74,7 +70,12 @@ int main()
 				joe.suitableSingle = 1;//Reset value incase dart throw is has missed
 				int returnedScore = throw_single(joe.target, joe.singleSuccess, joe.bullsEyeSuccess);
 
+				//cout << "Joe.score" << joe.score << "\n\n";
+				//cout << "Joe.tempScore" << joe.tempScore << "\n\n";
 				joe.score = joe.score - returnedScore;//Takes away from 301 score after each dart is thrown
+				//cout << "Changed Joe.score" << joe.score << "\n\n";
+				//cout << " Changed Joe.tempScore" << joe.tempScore << "\n\n";
+
 				if (joe.score < 50)
 				{
 					//Add back value of unsuitable dart e.g IF the dart is below 50 - this is invalid
