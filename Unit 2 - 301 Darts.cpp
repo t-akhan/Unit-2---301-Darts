@@ -26,6 +26,8 @@ int main()
 		//PLAYER 1
 		for (int i = 0; i < 1; i++)//Throw 1 dart per turn
 		{
+			joe.throws++;//add one to the number of darts thrown by the player
+
 			//IS THE SCORE APPROACHING 50 FOR A BULLSEYE? E.G WITHIN THE "20 RANGE"
 			if (joe.score > 50 && joe.score < 71)
 			{
@@ -79,7 +81,9 @@ int main()
 				else if (joe.score == 0)
 				{
 					joe.bullsHit++;
-					cout << "Bullseye count: " << joe.bullsHit << "\n\n";
+					cout << "Bullseye count: " << joe.bullsHit << "\n";
+					cout << "Number of throws: " << joe.throws << "\n";
+					cout << "----------------------------------------------------------------------" << "\n\n";
 					break;
 				}
 				cout << "SCORE REMAINING: " << joe.score << "\n\n";
@@ -101,6 +105,8 @@ int main()
 		//PLAYER 2
 		for (int i = 0; i < 1; i++)//Throw 1 dart per turn
 		{
+			sid.throws++;//add one to the number of darts thrown by the player
+
 			//IS THE SCORE APPROACHING 50 FOR A BULLSEYE? E.G WITHIN THE "20 RANGE"
 			if (sid.score > 50 && sid.score < 71)
 			{
@@ -125,8 +131,6 @@ int main()
 					}
 				}
 			}
-
-			//joe.throws++;//add one to the number of darts thrown by the player
 
 			if (sid.score == 50 || sid.score > 70)
 			{
@@ -154,7 +158,9 @@ int main()
 				else if (sid.score == 0)
 				{
 					sid.bullsHit++;
-					cout << "Bullseye count: " << sid.bullsHit << "\n\n";
+					cout << "Bullseye count: " << sid.bullsHit << "\n";
+					cout << "Number of throws: " << sid.throws << "\n";
+					cout << "----------------------------------------------------------------------" << "\n\n";
 					break;
 				}
 				cout << "SCORE REMAINING: " << sid.score << "\n\n";
@@ -189,7 +195,7 @@ int main()
 		cout << "Joe wins" << endl;
 		joe.calculate_average();
 	}
-	else
+	else if (joe.bullsHit <= sid.bullsHit)
 	{
 		//sid wins
 		cout << "Sid wins" << endl;
