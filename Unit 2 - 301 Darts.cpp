@@ -28,65 +28,59 @@ int main()
 			//IS THE SCORE APPROACHING 50 FOR A BULLSEYE? E.G WITHIN THE "20 RANGE"
 			if (joe.score > 50 && joe.score < 71)
 			{
-				joe.tempScore = joe.score;
-
 				//Suitable number is found to subtract from score only ONCE - until, score = EXACTLY 50
-				while (joe.tempScore != 50)
+				while (joe.score != 50)
 				{
-					//Subtraction, to eventually reduce tempScore to 50
-					joe.tempScore = joe.tempScore - joe.suitableSingle;
+					//Subtraction, to eventually reduce Score to 50
+					joe.score = joe.score - joe.suitableSingle;
 
 					//At first attempt, we haven't found the suitable dart to reduce the score to 50
-					if (joe.tempScore > 50)//CURRENT PROBLEM
+					if (joe.score > 50)
 					{
-						joe.tempScore = joe.tempScore + joe.suitableSingle;
+						joe.score = joe.score + joe.suitableSingle;
 						joe.suitableSingle++;
-
 
 						cout << joe.suitableSingle << ", ";
 					}
-					else if (joe.tempScore == 50)
+					else if (joe.score == 50)
 					{
 						//The target is specfically selected, than from the typical random function
 						joe.target = joe.suitableSingle;
-						cout << "Suitable single is:" << joe.suitableSingle;
+						cout << "Suitable single is:" << joe.suitableSingle << "\n" <<
+						"After successfully calculating single, score is now: " << joe.score << "\n\n";
 					}
 				}
 			}
 
 			//joe.throws++;//add one to the number of darts thrown by the player
 
-			if (joe.tempScore == 50 || joe.score > 70)
+			if (joe.score == 50 || joe.score > 70)
 			{
 				if (joe.score > 70)
 				{
 					joe.target = rand() % 20 + 1;
 				}
-				else if (joe.tempScore == 50)
+				else if (joe.score == 50)
 				{
 					joe.target = 50;
 				}
 
-				joe.suitableSingle = 1;//Reset value incase dart throw is has missed
+				joe.suitableSingle = 1;//Reset value incase dart throw has missed
 				int returnedScore = throw_single(joe.target, joe.singleSuccess, joe.bullsEyeSuccess);
 
-				//cout << "Joe.score" << joe.score << "\n\n";
-				//cout << "Joe.tempScore" << joe.tempScore << "\n\n";
 				joe.score = joe.score - returnedScore;//Takes away from 301 score after each dart is thrown
-				//cout << "Changed Joe.score" << joe.score << "\n\n";
-				//cout << " Changed Joe.tempScore" << joe.tempScore << "\n\n";
 
-				if (joe.score < 50)
+				if (joe.score < 50 && joe.score > 0)
 				{
 					//Add back value of unsuitable dart e.g IF the dart is below 50 - this is invalid
 					joe.score = joe.score + returnedScore;
 					cout << "You went below 50! Your score has been reset to value before that turn.";
 				}
 				//Means the returned value was 50 - the player hit the bullseye
-				else if (joe.score == 50)
+				else if (joe.score == 0)
 				{
-					joe.score = 0;
 					joe.bullsHit++;
+					cout << "Bullseye count: " << joe.bullsHit << "\n\n";
 				}
 				cout << "SCORE REMAINING: " << joe.score << "\n\n";
 
@@ -114,7 +108,7 @@ int main()
 		}*/
 	}
 	cout << joe.name << " won the game!";
-	//cout << "GAME HAS ENDED";
+
 	/*if (joe.bullsHit >= sid.bullsHit)
 	{	//joe wins 
 		cout << "Joe wins" << endl;
@@ -143,7 +137,7 @@ int throw_single(int playerTarget, int playerSingle, int playerBull)
 	{	//inner bullseye has success rate of "bullsEyeSuccess"
 		if (r <= playerBull)
 		{
-			cout << "You hit the bull " << "\n";
+			cout << "You hit the bull!" << "\n";
 
 			return 50;
 		}

@@ -13,7 +13,6 @@ public:
 	int throws; //store total throws of the dart
 	int bullsHit;//store number of bulls hit
 	int score = 301;
-	int tempScore;//a temporary score used to determine suitableSingle
 	int target = 0;//desired target to hit
 	int suitableSingle = 1;//1 dart throw which will lead to score = 50
 
