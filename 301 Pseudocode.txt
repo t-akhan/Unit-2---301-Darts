@@ -1,0 +1,13 @@
+IF the player score is 51 or 70
+THEN
+ACTIVATE preciseBull function (To hone in on EXACTLY 50)
+THEN
+SCORE is "-" from each single (Represented by an array) USE FOR LOOP?
+AFTER SUITABLE NUMBER SELECTION
+THE SUITABLE NUMBER is STRICTLY aimed for
+e.g 67 - (17 suitable number) = 50
+HOWEVER IF that number is not hit, REEVALUATE the next most suitable
+number
+DO this until score is 50
+IF score reaches less than 50, add back the last throw
+e.g score = 67 - (18 not suitable) = 49, add back the 18 (temp store this)
