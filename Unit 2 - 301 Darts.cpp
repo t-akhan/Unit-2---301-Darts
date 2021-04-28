@@ -5,8 +5,13 @@
 #include "Player.h"
 using namespace std;
 
+<<<<<<< HEAD
 //GITHUB DESKTOP APP TEST
 
+=======
+
+//TEST COMMIT
+>>>>>>> parent of f75b2ee (Revert test)
 int main()
 {
 	//create Player objects and initialise variables
