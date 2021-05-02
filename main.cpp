@@ -28,6 +28,8 @@ int GameLoop()
 	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.singleSuccess = 80; sid.score = 301;
 	Dartboard dartboard;
 
+	//int whoWon();
+
 	while ((joe.score != 0) || (sid.score != 0))//while neither player has reduced score to 0
 	{
 		//PLAYER 1
@@ -91,6 +93,17 @@ int GameLoop()
 					cout << "Bullseye count: " << joe.bullsHit << "\n";
 					cout << "Number of throws: " << joe.throws << "\n";
 					cout << "----------------------------------------------------------------------" << "\n\n";
+					if (joe.bullsHit >= sid.bullsHit)
+					{	//joe wins 
+						cout << "Joe wins" << endl;
+						joe.calculate_average();
+					}
+					else if (joe.bullsHit <= sid.bullsHit)
+					{
+						//sid wins
+						cout << "Sid wins" << endl;
+						sid.calculate_average();
+					}
 					return joe.score;
 				}
 				cout << "SCORE REMAINING: " << joe.score << "\n\n";
@@ -168,6 +181,17 @@ int GameLoop()
 					cout << "Bullseye count: " << sid.bullsHit << "\n";
 					cout << "Number of throws: " << sid.throws << "\n";
 					cout << "----------------------------------------------------------------------" << "\n\n";
+					if (joe.bullsHit >= sid.bullsHit)
+					{	//joe wins 
+						cout << "Joe wins" << endl;
+						joe.calculate_average();
+					}
+					else if (joe.bullsHit <= sid.bullsHit)
+					{
+						//sid wins
+						cout << "Sid wins" << endl;
+						sid.calculate_average();
+					}
 					return sid.score;
 				}
 				cout << "SCORE REMAINING: " << sid.score << "\n\n";
