@@ -16,6 +16,7 @@ public:
 	int target = 0;//desired target to hit
 	int suitableSingle = 1;//1 dart throw which will lead to score = 50
 
+	int GameLoop();
 	void calculate_average();
 };
 

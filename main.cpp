@@ -8,18 +8,26 @@ using namespace std;
 
 int main()
 {
-	//create Player objects and initialise variables
-	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.singleSuccess = 80; joe.score = 301;
-	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.singleSuccess = 80; sid.score = 301;
+	//Dartboard dartboard;
 
 	//function prototypes
 	int throw_single(int, int, int);
 	int throw_bull(int);
+	int GameLoop();
 
 	srand(time(0));	//initialise random num generator using time
 
 	//throw_single(50, 40, 70);
-		
+	GameLoop();
+}
+
+int GameLoop()
+{
+	//create Player objects and initialise variables
+	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.singleSuccess = 80; joe.score = 301;
+	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.singleSuccess = 80; sid.score = 301;
+	Dartboard dartboard;
+
 	while ((joe.score != 0) || (sid.score != 0))//while neither player has reduced score to 0
 	{
 		//PLAYER 1
@@ -47,7 +55,7 @@ int main()
 						//The target is specfically selected, than from the typical random function
 						joe.target = joe.suitableSingle;
 						cout << "Joe's suitable single is:" << joe.suitableSingle << "\n" <<
-						"After successfully calculating single, score is now: " << joe.score << "\n\n";
+							"After successfully calculating single, score is now: " << joe.score << "\n\n";
 					}
 				}
 			}
@@ -66,7 +74,7 @@ int main()
 				}
 
 				joe.suitableSingle = 1;//Reset value incase dart throw has missed
-				int returnedScore = throw_single(joe.target, joe.singleSuccess, joe.bullsEyeSuccess);
+				int returnedScore = dartboard.throw_single(joe.target, joe.singleSuccess, joe.bullsEyeSuccess);
 
 				joe.score = joe.score - returnedScore;//Takes away from 301 score after each dart is thrown
 
@@ -83,7 +91,7 @@ int main()
 					cout << "Bullseye count: " << joe.bullsHit << "\n";
 					cout << "Number of throws: " << joe.throws << "\n";
 					cout << "----------------------------------------------------------------------" << "\n\n";
-					break;
+					return joe.score;
 				}
 				cout << "SCORE REMAINING: " << joe.score << "\n\n";
 
@@ -143,7 +151,7 @@ int main()
 				}
 
 				sid.suitableSingle = 1;//Reset value incase dart throw has missed
-				int returnedScore = throw_single(sid.target, sid.singleSuccess, sid.bullsEyeSuccess);
+				int returnedScore = dartboard.throw_single(sid.target, sid.singleSuccess, sid.bullsEyeSuccess);
 
 				sid.score = sid.score - returnedScore;//Takes away from 301 score after each dart is thrown
 
@@ -160,7 +168,7 @@ int main()
 					cout << "Bullseye count: " << sid.bullsHit << "\n";
 					cout << "Number of throws: " << sid.throws << "\n";
 					cout << "----------------------------------------------------------------------" << "\n\n";
-					break;
+					return sid.score;
 				}
 				cout << "SCORE REMAINING: " << sid.score << "\n\n";
 
