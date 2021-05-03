@@ -7,16 +7,18 @@ using namespace std;
 class Player
 {
 public:
+	int GameLoop();//Main game loop
+	void calculate_average();
+	
 	string name;
 	int bullsEyeSuccess;//success rate to hit bullseye
-	int singleSuccess;//success rate to hit single dart
+	int singleSuccess = 0;//success rate to hit single dart
 	int throws; //store total throws of the dart
 	int bullsHit;//store number of bulls hit
-	int score;
+	int score;//the score that players must bring down to win
 	int target = 0;//desired target to hit
 	int suitableSingle = 1;//1 dart throw which will lead to score = 50
-
-	int GameLoop();
-	void calculate_average();
+	bool goesFirst = false;//Allows user to pick who goes first
+	int numOfGames;
 };
 
