@@ -9,6 +9,8 @@ class Player
 public:
 	int GameLoop();//Main game loop
 	void calculate_average();
+	void pick_successRate(int&, int&);
+	void who_goesFirst(Player&, Player&);
 	
 	string name;
 	int bullsEyeSuccess;//success rate to hit bullseye

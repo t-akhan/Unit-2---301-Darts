@@ -11,9 +11,11 @@ int main()
 	//Dartboard dartboard;
 
 	//function prototypes
+	int GameLoop();
+	void pick_successRate(int&, int&);
+	void who_goesFirst(Player&, Player&);
 	int throw_single(int, int, int);
 	int throw_bull(int);
-	int GameLoop();
 
 	srand(time(0));	//initialise random num generator using time
 
@@ -26,44 +28,11 @@ int GameLoop()
 	//create Player objects and initialise variables
 	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.score = 301;
 	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.score = 301;
+	Player userChoice;
 	Dartboard dartboard;
 
-	cout << "Select the success rate of Joe's, between 1% - 100%: ";
-	cin >> joe.singleSuccess;
-
-	//MAKE INTO FUNCTION AS THIS WILL BE REPEATED FOR SID
-	if (joe.singleSuccess >= 1 && joe.singleSuccess <= 100)
-	{
-		//joe.singleSuccess;
-		cout << joe.singleSuccess;
-	}
-	else
-	{
-		joe.singleSuccess = 80;
-		cout << joe.singleSuccess;
-	}
-
-	//---------------------------------------------------------------SELECTS WHO GOES FIRST
-	cout << "Please select if Joe or Sid will first:" << endl
-		<< "1 = Joe" << endl << "0 = Sid" << "\n\n";
-
-	//Variables that determines which player is initially selected
-	int playerSelect; cin >> playerSelect;
-
-	if (playerSelect == 1)
-	{
-		joe.goesFirst = true;
-		cout << "Joe has been selected" << "\n\n";
-	}
-	else if (playerSelect == 0)
-	{
-		sid.goesFirst = true;
-		cout << "Sid has been selected" << "\n\n";
-	}
-	else
-	{
-		cout << "Option is invalid, Joe has been selected.";
-	}
+	userChoice.pick_successRate(joe.singleSuccess, sid.singleSuccess);
+	userChoice.who_goesFirst(joe, sid);
 
 	//int whoWon();
 
