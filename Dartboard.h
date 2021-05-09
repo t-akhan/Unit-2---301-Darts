@@ -4,7 +4,6 @@ class Dartboard
 {
 public:
 	int throw_single(int, int, int);
-
 	int r;
 	int leftOrRight;
 	int bd[2][21];

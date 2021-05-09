@@ -14,13 +14,13 @@ public:
 	
 	string name;
 	int bullsEyeSuccess;//success rate to hit bullseye
-	int singleSuccess = 0;//success rate to hit single dart
-	int throws; //store total throws of the dart
-	int bullsHit;//store number of bulls hit
+	int singleSuccess = 80;//success rate to hit single dart
+	int throws = 0; //store total throws of the dart
+	int totalThrows = 0;
+	int bullsHit = 0;//store number of bulls hit
 	int score;//the score that players must bring down to win
 	int target = 0;//desired target to hit
 	int suitableSingle = 1;//1 dart throw which will lead to score = 50
 	bool goesFirst = false;//Allows user to pick who goes first
-	int numOfGames;
 };
 

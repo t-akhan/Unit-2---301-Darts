@@ -22,7 +22,7 @@ int Dartboard::throw_single(int playerTarget, int playerSingle, int playerBull)
 
 			return 50;
 		}
-		else//number is temporary for testing (must change)
+		else
 		{
 			playerTarget = 0;
 			playerTarget = rand() % 20 + 1;

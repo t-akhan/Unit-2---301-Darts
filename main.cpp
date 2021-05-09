@@ -8,10 +8,14 @@ using namespace std;
 
 int main()
 {
-	//Dartboard dartboard;
+	//create Player objects and initialise variables
+	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.score = 301;
+	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.score = 301;
+	Player userChoice;
+	Dartboard dartboard;
 
 	//function prototypes
-	int GameLoop();
+	int GameLoop(Player&, Player&, Dartboard&, int& add_matches);
 	void pick_successRate(int&, int&);
 	void who_goesFirst(Player&, Player&);
 	int throw_single(int, int, int);
@@ -19,22 +23,24 @@ int main()
 
 	srand(time(0));	//initialise random num generator using time
 
-	//Main game loop responsible for the simulation
-	GameLoop();
-}
-
-int GameLoop()
-{
-	//create Player objects and initialise variables
-	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.score = 301;
-	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.score = 301;
-	Player userChoice;
-	Dartboard dartboard;
-
 	userChoice.pick_successRate(joe.singleSuccess, sid.singleSuccess);
 	userChoice.who_goesFirst(joe, sid);
 
+	//Main game loop responsible for the simulations
+	int matches = 0;
+	int& matches_ref = matches;
+
+	for (matches_ref = matches; matches_ref < 25;)
+	{
+		GameLoop(joe, sid, dartboard, matches_ref);
+	}
+	
+}
+
+int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
+{
 	//int whoWon();
+	joe.score = 301; sid.score = 301;
 
 	while ((joe.score != 0) || (sid.score != 0))//while neither player has reduced score to 0
 	{
@@ -76,6 +82,7 @@ int GameLoop()
 				{
 					if (joe.score > 70)
 					{
+						//IF THEORY IS CORRECT, YOU'D ADD A ADDITIONAL OPTION FOR SINGLE 50 DART
 						joe.target = rand() % 20 + 1;
 					}
 					else if (joe.score == 50)
@@ -98,7 +105,7 @@ int GameLoop()
 					else if (joe.score == 0)
 					{
 						joe.bullsHit++;
-						cout << "Bullseye count: " << joe.bullsHit << "\n";
+						cout << "Total Bullseye count: " << joe.bullsHit << "\n";
 						cout << "Number of throws: " << joe.throws << "\n";
 						cout << "----------------------------------------------------------------------" << "\n\n";
 						if (joe.bullsHit >= sid.bullsHit)
@@ -112,6 +119,7 @@ int GameLoop()
 							cout << "Sid wins" << endl;
 							sid.calculate_average();
 						}
+						add_matches++;
 						return joe.score;
 					}
 					cout << "SCORE REMAINING: " << joe.score << "\n\n";
@@ -194,7 +202,7 @@ int GameLoop()
 					else if (sid.score == 0)
 					{
 						sid.bullsHit++;
-						cout << "Bullseye count: " << sid.bullsHit << "\n";
+						cout << "Total Bullseye count: " << sid.bullsHit << "\n";
 						cout << "Number of throws: " << sid.throws << "\n";
 						cout << "----------------------------------------------------------------------" << "\n\n";
 						if (joe.bullsHit >= sid.bullsHit)
@@ -208,6 +216,7 @@ int GameLoop()
 							cout << "Sid wins" << endl;
 							sid.calculate_average();
 						}
+						add_matches++;
 						return sid.score;
 					}
 					cout << "SCORE REMAINING: " << sid.score << "\n\n";
@@ -236,7 +245,7 @@ int GameLoop()
 				}
 			}*/
 		}
-		
+
 		//Checks if Sid went first, so that Joe can go next
 		if (sid.goesFirst == true)
 		{
@@ -255,4 +264,5 @@ int GameLoop()
 		cout << "Sid wins" << endl;
 		sid.calculate_average();
 	}
+
 }
