@@ -9,8 +9,8 @@ using namespace std;
 int main()
 {
 	//create Player objects and initialise variables
-	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71; joe.bullsHit = 0; joe.throws = 0; joe.score = 301;
-	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73; sid.bullsHit = 0; sid.throws = 0; sid.score = 301;
+	Player joe; joe.name = "Joe"; joe.bullsEyeSuccess = 71;
+	Player sid; sid.name = "Sid"; sid.bullsEyeSuccess = 73;
 	Player userChoice;
 	Dartboard dartboard;
 
@@ -34,7 +34,6 @@ int main()
 	{
 		GameLoop(joe, sid, dartboard, matches_ref);
 	}
-	
 }
 
 int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
@@ -109,17 +108,13 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 						cout << "Total Bullseye count: " << joe.bullsHit << "\n";
 						cout << "Number of throws: " << joe.throws << "\n";
 						cout << "----------------------------------------------------------------------" << "\n\n";
-						if (joe.bullsHit >= sid.bullsHit)
-						{	//joe wins 
-							cout << "Joe wins" << endl;
-							joe.calculate_average();
-						}
-						else if (joe.bullsHit <= sid.bullsHit)
-						{
-							//sid wins
-							cout << "Sid wins" << endl;
-							sid.calculate_average();
-						}
+
+						cout << "Joe wins\n";
+						joe.calculate_average();
+						
+						joe.totalThrows = joe.totalThrows + joe.throws;
+						joe.throws = 0;
+
 						add_matches++;
 						return joe.score;
 					}
@@ -134,6 +129,7 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					//USE SETTERS/GETTERS
 					joe.target = 0;
 					returnedScore = 0;
+
 					cout << joe.name << "'s turn Overview" "\n" << "----------------------------------------------------------------------" << "\n\n";
 				}
 			}
@@ -207,18 +203,14 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 						sid.bullsHit++;
 						cout << "Total Bullseye count: " << sid.bullsHit << "\n";
 						cout << "Number of throws: " << sid.throws << "\n";
-						cout << "----------------------------------------------------------------------" << "\n\n";
-						if (joe.bullsHit >= sid.bullsHit)
-						{	//joe wins 
-							cout << "Joe wins" << endl;
-							joe.calculate_average();
-						}
-						else if (joe.bullsHit <= sid.bullsHit)
-						{
-							//sid wins
-							cout << "Sid wins" << endl;
-							sid.calculate_average();
-						}
+						cout << "----------------------------------------------------------------------\n\n";
+
+						cout << "Sid wins" << endl;
+						sid.calculate_average();
+
+						sid.totalThrows = sid.totalThrows + sid.throws;
+						sid.throws = 0;
+
 						add_matches++;
 						return sid.score;
 					}
@@ -267,5 +259,8 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 		cout << "Sid wins" << endl;
 		sid.calculate_average();
 	}
-
+	else
+	{
+		cout << "Overall draw";
+	}
 }
