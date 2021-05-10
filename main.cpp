@@ -82,8 +82,9 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 				{
 					if (joe.score > 70)
 					{
-						//IF THEORY IS CORRECT, YOU'D ADD A ADDITIONAL OPTION FOR SINGLE 50 DART
-						joe.target = rand() % 20 + 1;
+						joe.target = rand() % 21;
+						joe.target = joe.singleSelect[joe.target];
+						cout << "ARRAY RANDOM ELEMENT:" << joe.target;
 					}
 					else if (joe.score == 50)
 					{
@@ -180,7 +181,9 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 				{
 					if (sid.score > 70)
 					{
-						sid.target = rand() % 20 + 1;
+						sid.target = rand() % 21;
+						sid.target = sid.singleSelect[sid.target];
+						cout << "ARRAY RANDOM ELEMENT:" << sid.target;
 					}
 					else if (sid.score == 50)
 					{
