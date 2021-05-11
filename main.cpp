@@ -20,6 +20,7 @@ int main()
 	void who_goesFirst(Player&, Player&);
 	int throw_single(int, int, int);
 	int throw_bull(int);
+	void turn_overview(Player& player);
 
 	srand(time(0));	//initialise random num generator using time
 
@@ -30,7 +31,7 @@ int main()
 	int matches = 0;
 	int& matches_ref = matches;
 
-	for (matches_ref = matches; matches_ref < 25;)
+	for (matches_ref = matches; matches_ref < 10;)
 	{
 		GameLoop(joe, sid, dartboard, matches_ref);
 	}
@@ -40,6 +41,7 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 {
 	//int whoWon();
 	joe.score = 301; sid.score = 301;
+	joe.throws = 0; sid.throws = 0;
 
 	while ((joe.score != 0) || (sid.score != 0))//while neither player has reduced score to 0
 	{
@@ -83,7 +85,6 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					{
 						joe.target = rand() % 21;
 						joe.target = joe.singleSelect[joe.target];
-						cout << "ARRAY RANDOM ELEMENT:" << joe.target;
 					}
 					else if (joe.score == 50)
 					{
@@ -99,24 +100,17 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					{
 						//Add back value of unsuitable dart e.g IF the dart is below 50 - this is invalid
 						joe.score = joe.score + returnedScore;
-						cout << "You went below 50! Your score has been reset to value before that turn.";
+						cout << "Joe went below 50! Your score has been reset to value before that turn.";
 					}
 					//Means the returned value was 50 - the player hit the bullseye
 					else if (joe.score == 0)
 					{
 						joe.bullsHit++;
-						cout << "Total Bullseye count: " << joe.bullsHit << "\n";
-						cout << "Number of throws: " << joe.throws << "\n";
-						cout << "----------------------------------------------------------------------" << "\n\n";
 
-						cout << "Joe wins\n";
-						joe.calculate_average();
-						
-						joe.totalThrows = joe.totalThrows + joe.throws;
-						joe.throws = 0;
-
+						joe.turn_overview(joe);
 						add_matches++;
 						return joe.score;
+						cout << "RETURN TEST";
 					}
 					cout << "SCORE REMAINING: " << joe.score << "\n\n";
 
@@ -126,10 +120,11 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 						joe.bullsHit++;//add one to the number of bullseyes thrown by the player
 					}*/
 
+					joe.turn_overview(joe);
+
 					//USE SETTERS/GETTERS
 					joe.target = 0;
 					returnedScore = 0;
-
 					cout << joe.name << "'s turn Overview" "\n" << "----------------------------------------------------------------------" << "\n\n";
 				}
 			}
@@ -179,7 +174,6 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					{
 						sid.target = rand() % 21;
 						sid.target = sid.singleSelect[sid.target];
-						cout << "ARRAY RANDOM ELEMENT:" << sid.target;
 					}
 					else if (sid.score == 50)
 					{
@@ -195,24 +189,18 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					{
 						//Add back value of unsuitable dart e.g IF the dart is below 50 - this is invalid
 						sid.score = sid.score + returnedScore;
-						cout << "You went below 50! Your score has been reset to value before that turn.";
+						cout << "Sid went below 50! Your score has been reset to value before that turn.";
 					}
 					//Means the returned value was 50 - the player hit the bullseye
 					else if (sid.score == 0)
 					{
 						sid.bullsHit++;
-						cout << "Total Bullseye count: " << sid.bullsHit << "\n";
-						cout << "Number of throws: " << sid.throws << "\n";
-						cout << "----------------------------------------------------------------------\n\n";
-
-						cout << "Sid wins" << endl;
-						sid.calculate_average();
-
-						sid.totalThrows = sid.totalThrows + sid.throws;
-						sid.throws = 0;
-
+						
+						sid.turn_overview(sid);
 						add_matches++;
 						return sid.score;
+						cout << "RETURN TEST";
+						//START FROM HERE
 					}
 					cout << "SCORE REMAINING: " << sid.score << "\n\n";
 
@@ -221,6 +209,8 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 						cout << joe.name << " has hit the bullseye" << endl;
 						joe.bullsHit++;//add one to the number of bullseyes thrown by the player
 					}*/
+
+					sid.turn_overview(sid);
 
 					//USE SETTERS/GETTERS
 					sid.target = 0;

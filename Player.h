@@ -12,6 +12,7 @@ public:
 	void calculate_average();
 	void pick_successRate(int&, int&);
 	void who_goesFirst(Player&, Player&);
+	void turn_overview(Player&);
 	
 	string name;
 	int bullsEyeSuccess;//success rate to hit bullseye

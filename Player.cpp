@@ -61,3 +61,20 @@ void Player::who_goesFirst(Player& joe_ref, Player& sid_ref)
 		cout << "Option is invalid, Joe has been selected.";
 	}
 }
+
+void Player::turn_overview(Player& player)
+{
+	player.totalThrows++;
+
+	cout << "Number of throws for match: " << player.throws << "\n";
+	cout << "Total throws count: " << player.totalThrows << "\n";
+	cout << "Total Bullseye count: " << player.bullsHit << "\n";
+	cout << "----------------------------------------------------------------------\n\n";
+
+	if(player.score == 0)
+	{
+		cout << player.name << " wins\n";
+	}
+
+	player.calculate_average();
+}
