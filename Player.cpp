@@ -75,6 +75,17 @@ void Player::turn_overview(Player& player)
 	{
 		cout << player.name << " wins\n";
 	}
-
-	player.calculate_average();
 }
+
+/*int valueCounter(Player player, int i)
+{
+	for (int j : player.winThrows)
+	{
+		int count = i;
+
+		if (j == player.winThrows[count])
+		{
+			count++;
+		}
+	}
+}*/

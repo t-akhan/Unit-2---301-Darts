@@ -62,6 +62,50 @@ int Dartboard::throw_single(int playerTarget, int playerSingle, int playerBull)
 	}
 }
 
+void swap(int* xp, int* yp)
+{
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+
+// A function to implement bubble sort
+void bubbleSort(int arr[], int n)
+{
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+
+		// Last i elements are already in place
+		for (j = 0; j < n - i - 1; j++)
+			if (arr[j] > arr[j + 1])
+				swap(&arr[j], &arr[j + 1]);
+}
+
+/* Function to print an array */
+void printArray(int arr[], int size)
+{
+	int i;
+
+	for (i = 0; i < size; i++)
+	{
+		if (arr[i] > 0)
+		{
+			cout << arr[i] << " ";
+			cout << endl;
+		}
+		
+		
+		/*for (int j : arr)
+		{
+			if (j == joe.winThrows[i])
+			{
+				count++;
+			}
+		}*/
+		//START HERE
+	}
+}
+
 /*int Dartboard:: throw_bull(int percentage)
 {
 	//  Throw for the bull with percent accuracy (20<p<85)

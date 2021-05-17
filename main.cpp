@@ -21,6 +21,9 @@ int main()
 	int throw_single(int, int, int);
 	int throw_bull(int);
 	void turn_overview(Player& player);
+	void swap(int* xp, int* yp);
+	void bubbleSort(int arr[], int n);
+	void printArray(int arr[], int size);
 
 	srand(time(0));	//initialise random num generator using time
 
@@ -31,10 +34,43 @@ int main()
 	int matches = 0;
 	int& matches_ref = matches;
 
-	for (matches_ref = matches; matches_ref < 10;)
+	//Increase simulations to 500 later on
+	for (matches_ref = matches; matches_ref < 26;)
 	{
 		GameLoop(joe, sid, dartboard, matches_ref);
 	}
+
+	int n = sizeof(joe.winThrows) / sizeof(joe.winThrows[0]);
+	bubbleSort(joe.winThrows, n);
+	cout << "Sorted array: \n";
+	printArray(joe.winThrows, n);
+
+	float total = 0;
+
+	/*for (int i = 0; i < joe.bullsHit; i++)
+	{
+		//total += joe.winThrows[i];
+
+		int count = 0;
+
+		for (int j:joe.winThrows)
+		{
+			if (j == joe.winThrows[i])
+			{
+				count++;
+			}
+		}
+		cout << "Number " << joe.winThrows[i] << " appeared " << count << " times in the array\n\n";
+		
+		
+		//cout << "Joe won 67 % of matches on " << joe.winThrows[i] << " throws of the dart" << "\n\n";
+
+		//cout << "INDEX VALUE " << i << ": " << joe.winThrows[i] << " *************************************************************************\n";
+		//cout << "TOTAL PERCENTAGE: " << total << "\n\n";
+	}*/
+
+	//Percentage calculation
+    //joe.throws = (joe.throws / 25) * 100;
 }
 
 int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
@@ -77,8 +113,6 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					}
 				}
 
-				//joe.throws++;//add one to the number of darts thrown by the player
-
 				if (joe.score == 50 || joe.score > 70)
 				{
 					if (joe.score > 70)
@@ -105,6 +139,15 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					//Means the returned value was 50 - the player hit the bullseye
 					else if (joe.score == 0)
 					{
+						//START FROM HERE
+						for (int i = joe.bullsHit; i < 26;)
+						{
+							joe.winThrows[i] = joe.throws;
+							//FIRST VALUE
+							cout << joe.winThrows[i] << "*****************************************************************************\n";
+
+							break;
+						}
 						joe.bullsHit++;
 
 						joe.turn_overview(joe);
@@ -113,12 +156,6 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 						cout << "RETURN TEST";
 					}
 					cout << "SCORE REMAINING: " << joe.score << "\n\n";
-
-					/*if (throwBull(joe.bullsEyeSuccess))//if throwBull function returns true
-					{
-						cout << joe.name << " has hit the bullseye" << endl;
-						joe.bullsHit++;//add one to the number of bullseyes thrown by the player
-					}*/
 
 					joe.turn_overview(joe);
 
@@ -204,12 +241,6 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					}
 					cout << "SCORE REMAINING: " << sid.score << "\n\n";
 
-					/*if (throwBull(joe.bullsEyeSuccess))//if throwBull function returns true
-					{
-						cout << joe.name << " has hit the bullseye" << endl;
-						joe.bullsHit++;//add one to the number of bullseyes thrown by the player
-					}*/
-
 					sid.turn_overview(sid);
 
 					//USE SETTERS/GETTERS
@@ -218,19 +249,7 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					cout << sid.name << "'s turn Overview" << "\n" << "----------------------------------------------------------------------" << "\n\n";
 				}
 			}
-			//ORIGINAL SID THROW FOR LOOP
-			/*for (int i = 0; i < 1; i++)//Sid throws 1 darts
-			{
-				sid.throws++;//add one to the number of darts thrown by the player
-
-				if (throwBull(sid.bullsEyeSuccess))
-				{
-					cout << sid.name << " has hit the bullseye" << endl;
-					sid.bullsHit++;//add one to the number of bullseyes thrown by the player
-				}
-			}*/
 		}
-
 		//Checks if Sid went first, so that Joe can go next
 		if (sid.goesFirst == true)
 		{
@@ -241,13 +260,13 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 	if (joe.bullsHit >= sid.bullsHit)
 	{	//joe wins 
 		cout << "Joe wins" << endl;
-		joe.calculate_average();
+		//joe.calculate_average();
 	}
 	else if (joe.bullsHit <= sid.bullsHit)
 	{
 		//sid wins
 		cout << "Sid wins" << endl;
-		sid.calculate_average();
+		//sid.calculate_average();
 	}
 	else
 	{
