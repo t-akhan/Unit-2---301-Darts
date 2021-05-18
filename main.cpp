@@ -4,6 +4,7 @@
 #include <string>
 #include "Player.h"
 #include "Dartboard.h"
+#include<set>
 using namespace std;
 
 int main()
@@ -21,8 +22,8 @@ int main()
 	int throw_single(int, int, int);
 	int throw_bull(int);
 	void turn_overview(Player& player);
-	void swap(int* xp, int* yp);
-	void bubbleSort(int arr[], int n);
+	void swap(float* xp, float* yp);
+	int bubbleSort(float* arr, int n);
 	void printArray(int arr[], int size);
 
 	srand(time(0));	//initialise random num generator using time
@@ -42,35 +43,56 @@ int main()
 
 	int n = sizeof(joe.winThrows) / sizeof(joe.winThrows[0]);
 	bubbleSort(joe.winThrows, n);
-	cout << "Sorted array: \n";
-	printArray(joe.winThrows, n);
 
-	float total = 0;
+	int dict[25] = { 0 };//Keeps track of values we have calculated percentage for
+	int dictIndex = 0;//Keeps track of unique number in the winThrows array
 
-	/*for (int i = 0; i < joe.bullsHit; i++)
+	for (int i = 0; i < 25; i++)//change 25 to const var
 	{
-		//total += joe.winThrows[i];
+		float percent = 0;
+		float count = 0;
+		bool exists = false;//Keeps track of value if it already exists withiin the dict array
 
-		int count = 0;
-
-		for (int j:joe.winThrows)
+		for (int k = 0; k < dictIndex; k++)
 		{
-			if (j == joe.winThrows[i])
+			if (dict[k] == joe.winThrows[i])//Will break out of for loop if the value exists
+			{
+				exists = true;
+				break;
+			}
+		}
+
+		//Continues on for the next iteration of the above for loop
+		if (exists == true)
+		{
+			continue;
+		}
+
+		//If a duplicate value exists, count keeps track of the amount of said value
+		for (int j : joe.winThrows)
+		{
+			if (j == joe.winThrows[i] && joe.winThrows[i] > 0)
 			{
 				count++;
 			}
 		}
-		cout << "Number " << joe.winThrows[i] << " appeared " << count << " times in the array\n\n";
-		
-		
-		//cout << "Joe won 67 % of matches on " << joe.winThrows[i] << " throws of the dart" << "\n\n";
 
-		//cout << "INDEX VALUE " << i << ": " << joe.winThrows[i] << " *************************************************************************\n";
-		//cout << "TOTAL PERCENTAGE: " << total << "\n\n";
-	}*/
+		//Increments within the array which indicates that value now exists, so that you can avoid this
+		if (count > 0)
+		{
+			dict[dictIndex] = joe.winThrows[i];
+			dictIndex++;
 
-	//Percentage calculation
-    //joe.throws = (joe.throws / 25) * 100;
+			//cout << "Test 1: " << joe.winThrows[i] << "\n\n";
+
+			percent = (1 * count / 25) * 100;
+
+			if (percent > 0)
+			{
+				cout << percent << "% of these were won by " << joe.winThrows[i] << " throws of the dart.\n\n";
+			}
+		}
+	}
 }
 
 int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
@@ -139,15 +161,13 @@ int GameLoop(Player& joe, Player& sid, Dartboard& dartboard, int& add_matches)
 					//Means the returned value was 50 - the player hit the bullseye
 					else if (joe.score == 0)
 					{
-						//START FROM HERE
-						for (int i = joe.bullsHit; i < 26;)
+						if (joe.bullsHit < 26)//change to 25?
 						{
-							joe.winThrows[i] = joe.throws;
+							joe.winThrows[joe.bullsHit] = joe.throws;
 							//FIRST VALUE
-							cout << joe.winThrows[i] << "*****************************************************************************\n";
-
-							break;
+							cout << joe.winThrows[joe.bullsHit] << "*****************************************************************************\n";
 						}
+						
 						joe.bullsHit++;
 
 						joe.turn_overview(joe);

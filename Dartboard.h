@@ -3,8 +3,8 @@
 class Dartboard
 {
 public:
-    void swap(int* xp, int* yp);
-    void bubbleSort(int arr[], int n);
+    void swap(float* xp, float* yp);
+    int bubbleSort(float* arr, int n);
 	void printArray(int arr[], int size);
 
 	int throw_single(int, int, int);
